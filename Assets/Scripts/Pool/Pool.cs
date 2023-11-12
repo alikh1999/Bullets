@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,8 +11,8 @@ namespace Bullets.Pool
         [SerializeField] 
         private int _initalPoolSize = 1;
         
-        private List<T> _pool = new List<T>();
-        private LinkedList<T> _inactivePoolables = new LinkedList<T>();
+        private List<T> _pool = new();
+        private LinkedList<T> _inactivePoolables = new();
 
         private void Awake()
         {
@@ -24,13 +23,14 @@ namespace Bullets.Pool
         {
             for (int i = 0; i < poolSize; i++)
             {
-                var poolable = Instantiate(_poolabePrefab);
+                var poolable = Instantiate(_poolabePrefab, Vector3.zero, Quaternion.identity, transform);
                 poolable.SetActive(false);
                 _pool.Add(poolable);
+                poolable.LifeCycleEnded += () => OnLifeCycleEnded(poolable);
                 _inactivePoolables.AddFirst(poolable);
             }
         }
-
+        
         public T GetObjectFromPool()
         {
             foreach (var element in _inactivePoolables.Where(t => !t.gameObject.activeInHierarchy))
@@ -40,14 +40,21 @@ namespace Bullets.Pool
                 return element;
             }
             
-            var poolable = Instantiate(_poolabePrefab);
+            var poolable = Instantiate(_poolabePrefab, Vector3.zero, Quaternion.identity, transform);
+            poolable.LifeCycleEnded += () => OnLifeCycleEnded(poolable);
             _pool.Add(poolable);
             return poolable;
         }
 
-        public void ReturnObjectToPool(T poolable)
+        private void ReturnObjectToPool(T poolable)
         {
             poolable.gameObject.SetActive(false);
+            _inactivePoolables.AddFirst(poolable);
+        }
+        
+        private void OnLifeCycleEnded(T poolable)
+        {
+            ReturnObjectToPool(poolable);
         }
     }
 }

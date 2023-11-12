@@ -1,5 +1,6 @@
 ﻿using System;
 using Bullets.Containers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace Bullets.UI
     public class ScoreUI : MonoBehaviour
     {
         [SerializeField] 
-        private Text _text;
+        private TMP_Text _text;
 
         private Game _game;
         private int _currentScore;

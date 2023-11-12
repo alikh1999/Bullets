@@ -2,7 +2,8 @@
     "name": "Bullets.UI",
     "rootNamespace": "Bullets.UI",
     "references": [
-        "GUID:09aab9cb077d18c42bc6d452b339b59a"
+        "GUID:09aab9cb077d18c42bc6d452b339b59a",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -25,12 +25,12 @@ namespace Bullets.Input
             
             PointerPositionUpdated?.Invoke(UnityEngine.Input.mousePosition);
 
-            if (!UnityEngine.Input.GetMouseButtonDown(0))
+            if (UnityEngine.Input.GetMouseButtonDown(0))
             {
                 RedBulletKeyPressed?.Invoke();
             }
             
-            if (!UnityEngine.Input.GetMouseButtonDown(1))
+            if (UnityEngine.Input.GetMouseButtonDown(1))
             {
                 BlueBulletKeyPressed?.Invoke();
             }

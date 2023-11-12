@@ -19,6 +19,8 @@ namespace Bullets
         {
             _redBulletPool = MainContainer.Instance.RedBulletPool;
             _blueBulletPool = MainContainer.Instance.BlueBulletPool;
+
+            _camera = Camera.main;
         }
 
         private void Start()
@@ -40,8 +42,9 @@ namespace Bullets
             _currentDirection = _camera.ScreenToWorldPoint(position) - transform.position;
             if (_currentDirection == Vector3.zero) 
                 return;
-            
-            Quaternion rotationToTarget = Quaternion.LookRotation(_currentDirection, Vector3.up);
+
+            var result = Quaternion.LookRotation(_currentDirection, Vector3.up);
+            Quaternion rotationToTarget = new Quaternion(0,0, result.y, result.w) ;
             transform.rotation = rotationToTarget;
         }
         
