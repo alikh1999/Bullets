@@ -6,13 +6,14 @@ namespace Bullets
 {
     public class Timer : MonoBehaviour
     {
+        public int ReamingTimeInSeconds => _reamingTimeInSeconds;
+        public event Action Ticked;
         public event Action Ended;
 
-        private int _reamingTimeInSeconds;
-        
-        public void Init(int totalTimeInSeconds)
+        [SerializeField] private int _reamingTimeInSeconds = 300;
+
+        private void Start()
         {
-            _reamingTimeInSeconds = totalTimeInSeconds;
             StartCoroutine(Coroutine());
         }
 
@@ -22,6 +23,7 @@ namespace Bullets
             {
                 yield return new WaitForSeconds(1);
                 _reamingTimeInSeconds--;
+                Ticked?.Invoke();
             }
             
             Ended?.Invoke();

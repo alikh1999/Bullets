@@ -9,8 +9,20 @@ namespace Bullets.Input
         public event Action RedBulletKeyPressed;
         public event Action BlueBulletKeyPressed;
 
+        private bool _isActive = true;
+        
+        public void SetActive(bool activeState)
+        {
+            _isActive = activeState;
+        }
+
         private void Update()
         {
+            if (!_isActive)
+            {
+                return;
+            }
+            
             PointerPositionUpdated?.Invoke(UnityEngine.Input.mousePosition);
 
             if (!UnityEngine.Input.GetMouseButtonDown(0))

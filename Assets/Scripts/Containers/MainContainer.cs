@@ -10,9 +10,13 @@ namespace Bullets.Containers
         public IInput Input => _pcInput;
         public Pool<Bullet> RedBulletPool => _redBulletPool;
         public Pool<Bullet> BlueBulletPool => _blueBulletPool;
-        public Pool<Bullet> RedEnemyPool => _redEnemyPool;
-        public Pool<Bullet> BlueEnemyPool => _blueEnemyPool;
+        public Pool<Enemy> RedEnemyPool => _redEnemyPool;
+        public Pool<Enemy> BlueEnemyPool => _blueEnemyPool;
+        public Timer Timer => _timer;
+        public Game Game => _game;
 
+        [SerializeField] 
+        private Game _game;
         [SerializeField]
         private PCInput _pcInput;
         [SerializeField]
@@ -20,9 +24,10 @@ namespace Bullets.Containers
         [SerializeField]
         private Pool<Bullet> _blueBulletPool;
         [SerializeField]
-        private Pool<Bullet> _redEnemyPool;
+        private Pool<Enemy> _redEnemyPool;
         [SerializeField]
-        private Pool<Bullet> _blueEnemyPool;
-
+        private Pool<Enemy> _blueEnemyPool;
+        [SerializeField] 
+        private Timer _timer;
     }
 }

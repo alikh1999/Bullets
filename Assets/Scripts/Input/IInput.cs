@@ -9,8 +9,9 @@ namespace Bullets.Input
         /// in screen 
         /// </summary>
         event Action<Vector3> PointerPositionUpdated;
-        
         event Action RedBulletKeyPressed;
         event Action BlueBulletKeyPressed;
+
+        void SetActive(bool activeState);
     }
 }
