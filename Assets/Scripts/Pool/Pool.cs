@@ -26,6 +26,7 @@ namespace Bullets.Pool
                 var poolable = Instantiate(_poolabePrefab, Vector3.zero, Quaternion.identity, transform);
                 poolable.SetActive(false);
                 _pool.Add(poolable);
+                poolable.LifeCycleEnded -= () => OnLifeCycleEnded(poolable);
                 poolable.LifeCycleEnded += () => OnLifeCycleEnded(poolable);
                 _inactivePoolables.AddFirst(poolable);
             }
@@ -41,6 +42,7 @@ namespace Bullets.Pool
             }
             
             var poolable = Instantiate(_poolabePrefab, Vector3.zero, Quaternion.identity, transform);
+            poolable.LifeCycleEnded -= () => OnLifeCycleEnded(poolable);
             poolable.LifeCycleEnded += () => OnLifeCycleEnded(poolable);
             _pool.Add(poolable);
             return poolable;
@@ -49,6 +51,7 @@ namespace Bullets.Pool
         private void ReturnObjectToPool(T poolable)
         {
             poolable.gameObject.SetActive(false);
+            poolable.transform.position = Vector3.zero;
             _inactivePoolables.AddFirst(poolable);
         }
         

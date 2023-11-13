@@ -30,16 +30,24 @@ namespace Bullets
             _wasBlueEnemySpawned = false;
             foreach (var enemyPosition in _enemiesPosition)
             {
-                var enemy = GetEnemy();
-                enemy.transform.position = enemyPosition.position;
-                enemy.Death += () =>
+                void CreateEnemy()
                 {
-                    var enemy1 = GetEnemy();
-                    enemy1.transform.position = enemyPosition.position;
-                    EnemyDied?.Invoke();
-                };
+                    var enemy = GetEnemy();
+                    enemy.transform.position = enemyPosition.position;
+                    _wasBlueEnemySpawned = !_wasBlueEnemySpawned;
+                    
+                    void OnDeath()
+                    {
+                        EnemyDied?.Invoke();
+                        enemy.Death -= OnDeath;
+                        CreateEnemy();
+                    }
+
+                    enemy.Death -= OnDeath;
+                    enemy.Death += OnDeath;
+                }
                 
-                _wasBlueEnemySpawned = !_wasBlueEnemySpawned;
+                CreateEnemy();
             }
 
             MainContainer.Instance.Timer.Ended += OnTimerEnded;

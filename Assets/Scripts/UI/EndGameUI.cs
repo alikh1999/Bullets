@@ -35,7 +35,7 @@ namespace Bullets.UI
         
         private void OnEnded()
         {
-            gameObject.SetActive(true);
+            _backgroundButton.gameObject.SetActive(true);
         }
     }
 }

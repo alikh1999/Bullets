@@ -11,8 +11,8 @@ namespace Bullets.World
 
         public void ApplyDamage()
         {
-            Death?.Invoke();
             Release();
+            Death?.Invoke();
         }
     }
 }

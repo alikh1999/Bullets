@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9065464060980996261}
   - component: {fileID: 9144306877532812696}
   - component: {fileID: 1925775649235053517}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: BlueEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -144,4 +144,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee8d586caed45989beeb884bf616973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementMagnitude: 1.5
